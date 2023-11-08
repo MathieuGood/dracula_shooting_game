@@ -1,0 +1,71 @@
+/* Loading 'Fira Code' font from Google */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+/* Dracula Theme Colors */
+:root {
+    --dracula-background: #282a36;
+    --dracula-current-line: #44475a;
+    --dracula-selection: #44475a;
+    --dracula-white: #f8f8f2;
+    --dracula-comment: #6272a4;
+    --dracula-cyan: #8be9fd;
+    --dracula-green: #50fa7b;
+    --dracula-orange: #ffb86c;
+    --dracula-pink: #ff79c6;
+    --dracula-purple: #bd93f9;
+    --dracula-red: #ff5555;
+    --dracula-yellow: #f1fa8c;
+}
+
+html * {
+    font-family: 'Fira Code', monospace;
+}
+
+body {
+    background-color: var(--dracula-background);
+    color: var(--dracula-foreground);
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#top_bar {
+    background-color: var(--dracula-cyan);
+    width: 100vw;
+    height: 50px;
+    justify-content: space-around;
+    display: flex;
+}
+
+#dracula {
+    width: auto;
+    height: 40px;
+}
+
+#game_set {
+    background-color: var(--dracula-current-line);
+}
+
+#start_button {
+    background-color: var(--dracula-red);
+    color: var(--dracula-white);
+    height: 100px;
+    width: 180px;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    /* Position */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -40px;
+}
+
+img#bat {
+    width: 60px;
+    height: auto;
+    position: absolute;
+}

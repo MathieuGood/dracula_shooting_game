@@ -14,6 +14,8 @@ let game_time_remaining;
 let start_button = document.getElementById("start_button");
 // -> bat
 let bat = document.getElementById("bat");
+// -> game_timer
+let game_timer = document.getElementById("timer");
 
 
 
@@ -37,10 +39,16 @@ function generateRandomPosition() {
     return random_number;
 }
 
+// Starts a timer for one game and displays the remaining time in game_timer element
 function startGameTimer() {
-    let game_duration = 60;
-
-
+    let time_remaining = 30;
+    let timer = setInterval(function () {
+        game_timer.innerHTML = time_remaining;
+        time_remaining--;
+        if (time_remaining < 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
 }
 
 // Increments the score variable by 1 and update the display of score in top_bar
@@ -50,23 +58,8 @@ function incrementAndUpdateScore() {
     score_span.textContent = score;
 }
 
-// NOT WORKING
-// Starts a timer 
-function setTimer(timer_cycle_variable, duration_in_seconds, action_when_time_elapsed) {
-    clearTimeout(timer_cycle_variable);
-    timer_cycle_variable = setTimeout(() => { action_when_time_elapsed }, duration_in_seconds);
-    console.log(timer_cycle_variable);
-    return timer_cycle_variable;
-}
-
 // Shows a bat at a random position in the window
 function showBat() {
-
-    // NOT WORKING
-    // Using setTimer function to time bat appearance
-    // setTimer(bat_time_cycle, 2000, showBat()));
-    
-    
     // Set timer to 2 seconds and hide bat when elapsed
     clearTimeout(bat_time_cycle);
     bat_time_cycle = setTimeout(() => {
@@ -86,16 +79,13 @@ function showBat() {
 }
 
 
-
-
-
 // When start_button is clicked
 // -> Hide start_button
 start_button.addEventListener("click", () => { hideElement(start_button); });
 // -> Show bat at random position
 start_button.addEventListener("click", () => { showBat(); });
 // -> Start game timer
-start_button.addEventListener("click", () => { setTimeout(() => {console.log("Game time elapsed")}, 1000); });
+start_button.addEventListener("click", () => { startGameTimer(); });
 
 
 // When bat is clicked

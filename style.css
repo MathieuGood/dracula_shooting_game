@@ -64,6 +64,18 @@ body {
     margin-top: -40px;
 }
 
+#endgame_window {
+    background-color: var(--dracula-cyan);
+    width: 300px;
+    height: 300px;
+    border: none;
+    border-radius: 10px;
+    /* Position */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
 img#bat {
     width: 60px;
     height: auto;

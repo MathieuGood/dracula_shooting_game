@@ -16,6 +16,10 @@ let start_button = document.getElementById("start_button");
 let bat = document.getElementById("bat");
 // -> game_timer
 let game_timer = document.getElementById("timer");
+// -> endgame_window
+let endgame_window = document.getElementById("endgame_message");
+// -> final_score
+let final_score = document.getElementById("final_score");
 
 
 
@@ -40,13 +44,16 @@ function generateRandomPosition() {
 }
 
 // Starts a timer for one game and displays the remaining time in game_timer element
-function startGameTimer() {
+function gameTimer() {
     let time_remaining = 30;
     let timer = setInterval(function () {
         game_timer.innerHTML = time_remaining;
         time_remaining--;
         if (time_remaining < 0) {
             clearInterval(timer);
+            // Add score to final_score
+            final_score.innerHTML = score;
+            showElement(endgame_window);
         }
     }, 1000);
 }
@@ -85,7 +92,7 @@ start_button.addEventListener("click", () => { hideElement(start_button); });
 // -> Show bat at random position
 start_button.addEventListener("click", () => { showBat(); });
 // -> Start game timer
-start_button.addEventListener("click", () => { startGameTimer(); });
+start_button.addEventListener("click", () => { gameTimer(); });
 
 
 // When bat is clicked

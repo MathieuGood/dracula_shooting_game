@@ -10,6 +10,12 @@ let game_time_remaining;
 // -> Boolean value that marks end of game
 let endgame;
 
+// Setting sound library
+// -> Evil laugh
+let evil_laugh = new Audio('media/evil-laugh.mp3');
+// -> Spooky music
+let spooky_music = new Audio('media/spooky-music.mp3');
+
 
 // Getting elements
 // -> start_button
@@ -88,7 +94,7 @@ function incrementAndUpdateScore() {
 function getCustomMessage(score) {
     // Default message if score == 0
     let msg = "No hit? Poor soul, you world will be destroyed soon!"
-    if (score == 1) 
+    if (score == 1)
         msg = "Just one? Dracula is not impressed by you!"
     else if (score < 6)
         msg = "Not enough to save the world, Dracula will live on."
@@ -112,12 +118,16 @@ function gameTimer() {
     // Change the cursor to a crosshair
     game_window.classList.add("crosshair")
 
+    // Play evil laughing sound and spooky music
+    evil_laugh.play();
+    spooky_music.play();
+
     // Reset score to 0 and endgame to false
     score = 0;
     endgame = false;
 
     // Set time for one game
-    let time_remaining = 10;
+    let time_remaining = 60;
     // Display time remaining in top_bar
     game_timer.innerHTML = time_remaining;
 
@@ -150,7 +160,7 @@ function gameTimer() {
             // For debugging
             console.log("GAME END");
         }
-    // 1 second interval
+        // 1 second interval
     }, 1000);
 }
 
@@ -178,3 +188,5 @@ bat.addEventListener("click", () => { hideElement(bat); });
 bat.addEventListener("click", () => { incrementAndUpdateScore() });
 // -> Show bat at random position
 bat.addEventListener("click", () => { showBat(); });
+// -> Play gun shot sound
+bat.addEventListener("click", () => { let gun_shot = new Audio('media/gun-shot.mp3'); gun_shot.play(); });

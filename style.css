@@ -5,9 +5,8 @@
 :root {
     --dracula-background: #282a36;
     --dracula-current-line: #44475a;
-    --dracula-selection: #44475a;
     --dracula-white: #f8f8f2;
-    --dracula-comment: #6272a4;
+    --dracula-light: #6272a4;
     --dracula-cyan: #8be9fd;
     --dracula-green: #50fa7b;
     --dracula-orange: #ffb86c;
@@ -18,7 +17,6 @@
 }
 
 /* Add media query to display smaller font for smartphones */
-
 
 html * {
     font-family: 'Fira Code', monospace;
@@ -41,6 +39,7 @@ body {
     height: 50px;
     justify-content: space-around;
     display: flex;
+
 }
 
 #dracula {
@@ -52,6 +51,7 @@ body {
     background-color: var(--dracula-background);
     height: 100vh;
     width: 100vw;
+    z-index: 1;
 }
 
 #start_button {
@@ -69,6 +69,7 @@ body {
     position: absolute;
     margin-left: 60px;
     margin-top: 170px;
+    z-index: 1;
 }
 
 .presentation_box {
@@ -82,14 +83,39 @@ body {
     position: absolute;
     top: 40%;
     left: 40%;
+    z-index: 1;
 }
 
 img#bat {
     width: 60px;
     height: auto;
     position: relative;
+    z-index: 1;
+}
+
+img#castle {
+    position: absolute;
+    height: 60vh;
+    width: auto;
+    bottom: 0;
+    right:0;
+    z-index: 0;
+}
+
+.crosshair {
+    cursor: url("media/crosshair.png"), auto;
 }
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 480px) {
+    #top_bar {
+        font-size: 0.8em;
+    }
+
+    #top_title {
+        display: none;
+    }
 }

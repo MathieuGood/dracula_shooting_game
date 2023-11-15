@@ -13,6 +13,8 @@ let endgame;
 
 // Getting elements
 // -> start_button
+let game_window = document.getElementById("game_window");
+// -> start_button
 let start_button = document.getElementById("start_button");
 // -> bat
 let bat = document.getElementById("bat");
@@ -28,7 +30,6 @@ let final_score = document.getElementById("final_score");
 let custom_message = document.getElementById("custom_message");
 
 
-
 // Hides the element given as argument by adding the class .hidden
 function hideElement(element) {
     element.classList.add("hidden");
@@ -36,10 +37,11 @@ function hideElement(element) {
     console.log("REMOVED visible FROM " + element['id']);
 }
 
+
 // Shows the element given as argument by removing the class .hidden
 function showElement(element) {
     element.classList.remove("hidden");
-    // For debugging 
+    // For debugging
     console.log("ADDED visible TO " + element['id']);
 }
 
@@ -58,9 +60,8 @@ function showBat() {
     if (endgame == false) {
         clearTimeout(bat_time_cycle);
         bat_time_cycle = setTimeout(() => {
-            hideElement(bat);
             showBat();
-        }, 2000);
+        }, 4000);
 
         // Set random position for bat
         bat.style.top = generateRandomPosition(0, 80) + "vh";
@@ -107,18 +108,35 @@ function gameTimer() {
 
     //For debugging
     console.log("GAME START");
-    
-    // Set time for one game
+
+    // Change the cursor to a crosshair
+    game_window.classList.add("crosshair")
+
+    // Reset score to 0 and endgame to false
     score = 0;
+    endgame = false;
+
+    // Set time for one game
     let time_remaining = 10;
+    // Display time remaining in top_bar
+    game_timer.innerHTML = time_remaining;
+
+    // Start a 1 second timer
     let timer = setInterval(function () {
-        game_timer.innerHTML = time_remaining;
+        // Decrement time 
         time_remaining--;
-        if (time_remaining < 0) {
+        // Update time remaining displayed in top_bar
+        game_timer.innerHTML = time_remaining;
+
+        // When time_remaining is over
+        if (time_remaining < 1) {
+            // Reset the timer
             clearInterval(timer);
+            // Remove the crosshair cursor
+            game_window.classList.remove("crosshair");
             // Add score to final_score
             final_score.innerHTML = score;
-            // If a bat is still visible, hide it
+            // In case a bat is still visible, hide it
             hideElement(bat);
             // Set the end of the game
             endgame = true;
@@ -132,6 +150,7 @@ function gameTimer() {
             // For debugging
             console.log("GAME END");
         }
+    // 1 second interval
     }, 1000);
 }
 
@@ -145,10 +164,11 @@ start_button.addEventListener("click", () => { hideElement(startgame_message); }
 start_button.addEventListener("click", () => { hideElement(endgame_message); });
 // -> Set endgame to false
 start_button.addEventListener("click", () => { endgame = false });
-// -> Show bat at random position
-start_button.addEventListener("click", () => { showBat(); });
 // -> Start game timer
 start_button.addEventListener("click", () => { gameTimer(); });
+// -> Show bat at random position
+start_button.addEventListener("click", () => { showBat(); });
+
 
 
 // When bat is clicked

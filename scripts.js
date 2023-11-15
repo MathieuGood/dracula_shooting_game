@@ -1,13 +1,13 @@
 // Setting global variables
 // -> Game score
-let score = 0;
+let score;
 // -> Bat time cycle
 let bat_time_cycle;
 // -> Game timer cycle
 let game_time_cycle;
 // -> Game timer remaining time in seconds
 let game_time_remaining;
-// -> Boolean value that notifies end of game
+// -> Boolean value that marks end of game
 let endgame;
 
 
@@ -83,9 +83,32 @@ function incrementAndUpdateScore() {
 }
 
 
+function getCustomMessage(score) {
+    // Default message if score == 0
+    let msg = "No hit? Poor soul, you world will be destroyed soon!"
+    if (score == 1) 
+        msg = "Just one? Dracula is not impressed by you!"
+    else if (score < 6)
+        msg = "Not enough to save the world, Dracula will live on."
+    else if (score < 11)
+        msg = "Nice try, but more strength is needed to beat Dracula!"
+    else if (score < 16)
+        msg = "You are very close to ending this, Dracula is getting weak!"
+    else if (score < 25)
+        msg = "Almost perfect, Dracula will not regenerate for centuries!"
+    else if (score > 35)
+        msg = "You did it! Dracula has been beaten and will never return!"
+    return msg;
+}
+
 // Starts a timer for one game and displays the remaining time in game_timer element
 function gameTimer() {
+
+    //For debugging
+    console.log("GAME START");
+    
     // Set time for one game
+    score = 0;
     let time_remaining = 10;
     let timer = setInterval(function () {
         game_timer.innerHTML = time_remaining;
@@ -99,14 +122,14 @@ function gameTimer() {
             // Set the end of the game
             endgame = true;
             // Set the custom end message
-            custom_message.textContent = "You are good!";
+            custom_message.textContent = getCustomMessage(score);
             // Display the endgame message
             showElement(endgame_message);
             // Display start_button
             showElement(start_button);
 
             // For debugging
-            console.log("Endgame!");
+            console.log("GAME END");
         }
     }, 1000);
 }

@@ -28,16 +28,22 @@
     
     <!-- Game window -->
     <div id="game_window">
-        <button id="start_button">Start game</button>
-        <img id="bat" src="media/bat1.svg" class="hidden">
 
-        <div id="endgame_message" class="hidden">
-            <p>Game is finished !</p>
-            <p>Your score is <span id="final_score"></span></p>
-            <button id="start_button">Start new game</button>
-            
+        <div id="startgame_message" class="presentation_box">
+            <p>Dear vampire hunter, </p>
+            <p>Help eradicating Dracula from this world!</p>
+            <p>Shoot all Dracula's bats and end this once for all.</p>
         </div>
+
+        <div id="endgame_message" class="presentation_box hidden ">
+            <p>The hunt has ended!</p>
+            <p>Your score is <span id="final_score"></span></p>
+            <p><span id="custom_message"></span></p>
+        </div>
+
+        <button id="start_button">Start new game</button>
         
+        <img id="bat" src="media/bat1.svg" class="hidden">
 
     </div>
 

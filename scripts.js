@@ -18,10 +18,14 @@ let start_button = document.getElementById("start_button");
 let bat = document.getElementById("bat");
 // -> game_timer
 let game_timer = document.getElementById("timer");
-// -> endgame_window
-let endgame_window = document.getElementById("endgame_message");
+// -> endgame_message
+let startgame_message = document.getElementById("startgame_message");
+// -> endgame_message
+let endgame_message = document.getElementById("endgame_message");
 // -> final_score
 let final_score = document.getElementById("final_score");
+// -> custom_message
+let custom_message = document.getElementById("custom_message");
 
 
 
@@ -39,11 +43,45 @@ function showElement(element) {
     console.log("ADDED visible TO " + element['id']);
 }
 
+
 // Generates a random number between 0 and 100
 function generateRandomPosition() {
     let random_number = Math.random() * 100;
     return random_number;
 }
+
+
+// Shows a bat at a random position in the window
+function showBat() {
+    // If the game has not ended (endgame = false)
+    // Set timer to 2 seconds and hide bat when elapsed
+    if (endgame == false) {
+        clearTimeout(bat_time_cycle);
+        bat_time_cycle = setTimeout(() => {
+            hideElement(bat);
+            showBat();
+        }, 2500);
+
+        // Set random position for bat
+        bat.style.top = generateRandomPosition() + "%";
+        bat.style.left = generateRandomPosition() + "%";
+        // For debugging
+        // bat.style.top = "0%";
+        // bat.style.left = "0%";
+
+        // Show bat
+        showElement(bat);
+    }
+}
+
+
+// Increments the score variable by 1 and update the display of score in top_bar
+function incrementAndUpdateScore() {
+    score += 1;
+    let score_span = document.getElementById("score");
+    score_span.textContent = score;
+}
+
 
 // Starts a timer for one game and displays the remaining time in game_timer element
 function gameTimer() {
@@ -56,52 +94,33 @@ function gameTimer() {
             clearInterval(timer);
             // Add score to final_score
             final_score.innerHTML = score;
+            // If a bat is still visible, hide it
+            hideElement(bat);
+            // Set the end of the game
             endgame = true;
-            showElement(endgame_window);
-            
+            // Set the custom end message
+            custom_message.textContent = "You are good!";
+            // Display the endgame message
+            showElement(endgame_message);
+            // Display start_button
+            showElement(start_button);
+
             // For debugging
             console.log("Endgame!");
-            
         }
     }, 1000);
-}
-
-// Increments the score variable by 1 and update the display of score in top_bar
-function incrementAndUpdateScore() {
-    score += 1;
-    let score_span = document.getElementById("score");
-    score_span.textContent = score;
-}
-
-// Shows a bat at a random position in the window
-function showBat() {
-    // If the game has not ended (endgame = false)
-    // Set timer to 2 seconds and hide bat when elapsed
-    if (endgame == false) {
-        clearTimeout(bat_time_cycle);
-        bat_time_cycle = setTimeout(() => {
-            hideElement(bat);
-            showBat();
-        }, 2500);
-    
-        // Set random position for bat
-        bat.style.top = generateRandomPosition() + "%";
-        bat.style.left = generateRandomPosition() + "%";
-        // For debugging
-        // bat.style.top = "0%";
-        // bat.style.left = "0%";
-    
-        // Show bat
-        showElement(bat);
-    }
 }
 
 
 // When start_button is clicked
 // -> Hide start_button
 start_button.addEventListener("click", () => { hideElement(start_button); });
+// -> Hide startgame_message
+start_button.addEventListener("click", () => { hideElement(startgame_message); });
+// -> Hide endgame_message
+start_button.addEventListener("click", () => { hideElement(endgame_message); });
 // -> Set endgame to false
-start_button.addEventListener("click", () => {endgame = false});
+start_button.addEventListener("click", () => { endgame = false });
 // -> Show bat at random position
 start_button.addEventListener("click", () => { showBat(); });
 // -> Start game timer

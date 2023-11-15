@@ -17,15 +17,22 @@
     --dracula-yellow: #f1fa8c;
 }
 
+/* Add media query to display smaller font for smartphones */
+
+
 html * {
     font-family: 'Fira Code', monospace;
     font-weight: 500;
+    /* To enhance game experience,preventing any element to be selected */
+    user-select: none;
 }
 
 body {
     background-color: var(--dracula-background);
     color: var(--dracula-foreground);
     margin: 0;
+    height: 100%;
+    overflow: hidden;
 }
 
 #top_bar {
@@ -42,11 +49,14 @@ body {
 }
 
 #game_window {
-    background-color: var(--dracula-current-line);
+    background-color: var(--dracula-background);
+    height: 100vh;
+    width: 100vw;
 }
 
 #start_button {
     background-color: var(--dracula-red);
+    font-size: 1em;
     color: var(--dracula-white);
     height: 100px;
     width: 180px;
@@ -77,7 +87,7 @@ body {
 img#bat {
     width: 60px;
     height: auto;
-    position: absolute;
+    position: relative;
 }
 
 .hidden {

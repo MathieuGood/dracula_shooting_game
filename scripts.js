@@ -44,9 +44,9 @@ function showElement(element) {
 }
 
 
-// Generates a random number between 0 and 100
-function generateRandomPosition() {
-    let random_number = Math.random() * 100;
+// Generates a random number between min and max
+function generateRandomPosition(min, max) {
+    let random_number = Math.random() * (max - min) + min;
     return random_number;
 }
 
@@ -60,14 +60,15 @@ function showBat() {
         bat_time_cycle = setTimeout(() => {
             hideElement(bat);
             showBat();
-        }, 2500);
+        }, 2000);
 
         // Set random position for bat
-        bat.style.top = generateRandomPosition() + "%";
-        bat.style.left = generateRandomPosition() + "%";
+        bat.style.top = generateRandomPosition(0, 80) + "vh";
+        bat.style.left = generateRandomPosition(0, 90) + "vw";
+
         // For debugging
-        // bat.style.top = "0%";
-        // bat.style.left = "0%";
+        // bat.style.top = "80vh";
+        // bat.style.left = "90vw";
 
         // Show bat
         showElement(bat);

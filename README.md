@@ -10,3 +10,6 @@ One you have clicked on the start button, you have 60 seconds to kill as many ba
 Depending on your final score, a different message will show up.
 
 Please turn sound on for better experience.
+
+![Game screenshot](dracula_screenshot.png)
+
